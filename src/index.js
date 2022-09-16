@@ -17,7 +17,7 @@ if (document.readyState !== "loading") {
   console.log("valmis");
   initialize();
 } else {
-  document.addEventListener("DOMContetntLoaded", function () {
+  document.addEventListner("DOMContetntLoaded", function () {
     console.log("else valmis");
     initialize();
   });
@@ -31,6 +31,7 @@ function initialize() {
   addButton.addEventListener("click", function () {
     var table = document.getElementById("table-body");
     var user = document.getElementById("input-username").value;
+    var cbox = document.getElementById("input-admin");
     const allrows = document.querySelectorAll("tr");
     console.log(allrows[0]);
     var x = users.includes(user);
@@ -39,15 +40,15 @@ function initialize() {
         console.log(row);
         row.cells[1].innerText = document.getElementById("input-email").value;
         row.cells[2].innerText = document.getElementById("input-address").value;
-        row.cells[3].innerText = document.getElementById("input-admin").value;
+        if (cbox.checked == true) {
+          row.cells[3].innerHTML = "X";
+        } else {
+          row.cells[3].innerHTML = "-";
+        }
+        //row.cells[3].innerText = document.getElementById("input-admin").value;
         return;
       }
     }
-
-    /*const r = row.childNodes();
-        r[1].innerText = document.getElementById("input-email").value;
-        r[2].innerText = document.getElementById("input-email").value;
-        r[3].innerText = document.getElementById("input-email").value;*/
     var newRow = table.insertRow(0);
     var cell1 = newRow.insertCell(0);
     var cell2 = newRow.insertCell(1);
@@ -56,22 +57,27 @@ function initialize() {
     cell1.innerText = document.getElementById("input-username").value;
     cell2.innerText = document.getElementById("input-email").value;
     cell3.innerText = document.getElementById("input-address").value;
-    //document.getElementById("input-admin").value;
-    //var cbox = document.createElement("INPUT");
-    //cbox.setAttribute("type", "checkbox");
-    //cell4.cbox.innerHTML;
+    if (cbox.checked == true) {
+      cell4.innerHTML = "X";
+    } else {
+      cell4.innerHTML = "-";
+    }
 
     users.push(document.getElementById("input-username").value);
   });
 
   emptyButton.addEventListener("click", function () {
     var headercount = 1;
-    var mytable = document.getElementById("tab");
-    var rowCount = mytable.rows.length;
+    var tab = document.getElementById("tab");
+    var rowCount = tab.rows.length;
     console.log(rowCount);
 
+    //var q = querySelectorAll("td");
+
     for (var x = headercount; x < rowCount; x++) {
-      mytable.deleteRow(headercount);
+      tab.deleteRow(headercount);
     }
+    var rowCount = tab.rows.length;
+    console.log(rowCount);
   });
 }
