@@ -1,6 +1,8 @@
 /* Lähteinä käytetty  kurssimateriaalien lisäksi:
 https://www.w3schools.com/jsref/met_table_insertrow.asp
-
+'https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
+https://www.w3schools.com/jsref/met_node_appendchild.asp?ref=hackernoon.com
+https://www.w3schools.com/js/js_htmldom_nodes.asp
 */
 import "./styles.css";
 
@@ -46,32 +48,34 @@ function initialize() {
         return;
       }
     }
-    var newRow = table.insertRow(0);
-    var cell1 = newRow.insertCell(0);
-    var cell2 = newRow.insertCell(1);
-    var cell3 = newRow.insertCell(2);
-    var cell4 = newRow.insertCell(3);
-    cell1.innerText = document.getElementById("input-username").value;
-    cell2.innerText = document.getElementById("input-email").value;
-    cell3.innerText = document.getElementById("input-address").value;
-    if (cbox.checked == true) {
-      cell4.innerHTML = "X";
-    } else {
-      cell4.innerHTML = "-";
+
+    const newRow = document.createElement("tr");
+    for (let j = 0; j < 4; j++) {
+      const cell = document.createElement("td");
+      if (j === 0) {
+        cell.innerText = document.getElementById("input-username").value;
+      } else if (j === 1) {
+        cell.innerText = document.getElementById("input-email").value;
+      } else if (j === 2) {
+        cell.innerText = document.getElementById("input-address").value;
+      } else {
+        if (cbox.checked === true) {
+          cell.innerHTML = "X";
+        } else {
+          cell.innerHTML = "-";
+        }
+      }
+      newRow.appendChild(cell);
     }
+    table.appendChild(newRow);
   });
 
   emptyButton.addEventListener("click", function () {
     var tab = document.getElementById("tab");
     var rowCount = tab.rows.length;
-    console.log(rowCount);
-
-    //var q = querySelectorAll("td");
 
     for (var x = 1; x < rowCount; x++) {
       tab.deleteRow(1);
     }
-    var rowCount = tab.rows.length;
-    console.log(rowCount);
   });
 }
