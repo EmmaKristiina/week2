@@ -17,7 +17,7 @@ if (document.readyState !== "loading") {
   console.log("valmis");
   initialize();
 } else {
-  document.addEventListner("DOMContetntLoaded", function () {
+  document.addEventListener("DOMContetntLoaded", function () {
     console.log("else valmis");
     initialize();
   });
