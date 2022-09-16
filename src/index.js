@@ -26,15 +26,12 @@ if (document.readyState !== "loading") {
 function initialize() {
   const addButton = document.getElementById("submit-data");
   const emptyButton = document.getElementById("empty-table");
-  const users = ["use1", "use2", "use3"];
 
   addButton.addEventListener("click", function () {
     var table = document.getElementById("table-body");
     var user = document.getElementById("input-username").value;
     var cbox = document.getElementById("input-admin");
     const allrows = document.querySelectorAll("tr");
-    console.log(allrows[0]);
-    var x = users.includes(user);
     for (let row of allrows) {
       if (row.cells[0].innerText === user) {
         console.log(row);
@@ -62,20 +59,17 @@ function initialize() {
     } else {
       cell4.innerHTML = "-";
     }
-
-    users.push(document.getElementById("input-username").value);
   });
 
   emptyButton.addEventListener("click", function () {
-    var headercount = 1;
     var tab = document.getElementById("tab");
     var rowCount = tab.rows.length;
     console.log(rowCount);
 
     //var q = querySelectorAll("td");
 
-    for (var x = headercount; x < rowCount; x++) {
-      tab.deleteRow(headercount);
+    for (var x = 1; x < rowCount; x++) {
+      tab.deleteRow(1);
     }
     var rowCount = tab.rows.length;
     console.log(rowCount);
